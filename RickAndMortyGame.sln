@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36511.14 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MortyImplementations", "MortyImplementations", "{228A2216-B0E8-47EA-A81F-EE13CB544AF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RickAndMortyGame.Cli", "src\RickAndMortyGame.Cli\RickAndMortyGame.Cli.csproj", "{D1EF287C-92E3-4DCE-9330-C7AF05285E14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RickAndMortyGame.Core", "src\RickAndMortyGame.Core\RickAndMortyGame.Core.csproj", "{E37FB6F8-AB75-4516-9EEA-3E1D7A253B9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassicMorty", "src\MortyImplementations\ClassicMorty\ClassicMorty.csproj", "{416D0200-8436-4CCF-8E99-8FC6EBBCF0BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyMorty", "src\MortyImplementations\LazyMorty\LazyMorty.csproj", "{239EAEDC-2D44-443C-ADAF-D89C6F4089E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CunningMorty", "src\MortyImplementations\CunningMorty\CunningMorty.csproj", "{310695D2-1A9E-44C2-9F5F-280F686735DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D1EF287C-92E3-4DCE-9330-C7AF05285E14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1EF287C-92E3-4DCE-9330-C7AF05285E14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1EF287C-92E3-4DCE-9330-C7AF05285E14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1EF287C-92E3-4DCE-9330-C7AF05285E14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E37FB6F8-AB75-4516-9EEA-3E1D7A253B9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E37FB6F8-AB75-4516-9EEA-3E1D7A253B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E37FB6F8-AB75-4516-9EEA-3E1D7A253B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E37FB6F8-AB75-4516-9EEA-3E1D7A253B9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{416D0200-8436-4CCF-8E99-8FC6EBBCF0BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{416D0200-8436-4CCF-8E99-8FC6EBBCF0BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{416D0200-8436-4CCF-8E99-8FC6EBBCF0BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{416D0200-8436-4CCF-8E99-8FC6EBBCF0BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{239EAEDC-2D44-443C-ADAF-D89C6F4089E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{239EAEDC-2D44-443C-ADAF-D89C6F4089E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{239EAEDC-2D44-443C-ADAF-D89C6F4089E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{239EAEDC-2D44-443C-ADAF-D89C6F4089E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{310695D2-1A9E-44C2-9F5F-280F686735DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{310695D2-1A9E-44C2-9F5F-280F686735DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{310695D2-1A9E-44C2-9F5F-280F686735DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{310695D2-1A9E-44C2-9F5F-280F686735DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{228A2216-B0E8-47EA-A81F-EE13CB544AF1} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
+		{D1EF287C-92E3-4DCE-9330-C7AF05285E14} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
+		{E37FB6F8-AB75-4516-9EEA-3E1D7A253B9C} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
+		{416D0200-8436-4CCF-8E99-8FC6EBBCF0BF} = {228A2216-B0E8-47EA-A81F-EE13CB544AF1}
+		{239EAEDC-2D44-443C-ADAF-D89C6F4089E0} = {228A2216-B0E8-47EA-A81F-EE13CB544AF1}
+		{310695D2-1A9E-44C2-9F5F-280F686735DC} = {228A2216-B0E8-47EA-A81F-EE13CB544AF1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB04CB25-C1C2-49A5-A33C-79AC8C5229F2}
+	EndGlobalSection
+EndGlobal
