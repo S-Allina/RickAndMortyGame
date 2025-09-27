@@ -37,7 +37,7 @@ namespace ClassicMorty
 
         public int HidePortalGun(int numberOfBoxes, IRandomProvider randomProvider)
         {
-            var result = randomProvider.GenerateFairRandomAsync(numberOfBoxes);
+            var result = randomProvider.GenerateFairRandom(numberOfBoxes);
 
             return result.FinalValue;
         }

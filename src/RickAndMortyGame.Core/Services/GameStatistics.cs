@@ -15,10 +15,6 @@ namespace RickAndMortyGame.Core.Services
         public int StayGames { get; private set; }
         public int StayWins { get; private set; }
 
-        public double OverallWinRate => TotalGames > 0 ? (double)GamesWon / TotalGames : 0;
-        public double SwitchWinRate => SwitchGames > 0 ? (double)SwitchWins / SwitchGames : 0;
-        public double StayWinRate => StayGames > 0 ? (double)StayWins / StayGames : 0;
-
         public void RecordGame(bool won, bool switched, int numOfBoxes)
         {
             TotalGames++;

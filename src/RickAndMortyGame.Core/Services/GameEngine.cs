@@ -25,7 +25,7 @@ namespace RickAndMortyGame.Core.Services
         {
             Console.WriteLine($"Oh, Rick, I`m gonna hide your portal gun in one of the {numOfBoxes} boxes, okay?");
 
-            var portalGunRes = _randomProvider.GenerateFairRandomAsync(numOfBoxes);
+            var portalGunRes = _randomProvider.GenerateFairRandom(numOfBoxes);
             var portalGunBox = portalGunRes.FinalValue;
 
             Console.WriteLine($"Morty: Ok, ok, I hid the gun. What's your guess [0,{numOfBoxes})?");
@@ -62,17 +62,11 @@ namespace RickAndMortyGame.Core.Services
         private void RevealFairRandomProof(FairRandomResult firstResult, FairRandomResult secondResult, int portalGunBox, int numOfBoxes)
         {
             Console.WriteLine($"Morty: Aww man, my 1st random value is {firstResult.ComputerValue}.");
-
             Console.WriteLine($"Morty: KEY1={BitConverter.ToString(firstResult.SecretKey).Replace("-", "")}");
-
             Console.WriteLine($"Morty: So the 1st fair number is ({firstResult.UserValue} + {firstResult.ComputerValue}) % {numOfBoxes} = {firstResult.FinalValue}.");
-
             Console.WriteLine($"Morty: Aww man, my 2nd random value is {secondResult.ComputerValue}.");
-
             Console.WriteLine($"Morty: KEY2={BitConverter.ToString(secondResult.SecretKey).Replace("-", "")}");
-
             Console.WriteLine($"Morty: Uh, okay, the 2nd fair number is ({secondResult.UserValue} + {secondResult.ComputerValue}) % {numOfBoxes-1} = {secondResult.FinalValue}.");
-
             Console.WriteLine($"Morty: Your portal gun is in the box {portalGunBox}.");
         }
 
@@ -107,7 +101,7 @@ namespace RickAndMortyGame.Core.Services
         {
             Console.WriteLine($"Morty: Let's, uh, generate another value now, I mean, to select a box to keep in the game.");
 
-            var secondRandomRes = _randomProvider.GenerateFairRandomAsync(availableBoxes.Length);
+            var secondRandomRes = _randomProvider.GenerateFairRandom(availableBoxes.Length);
             var selectedBox = availableBoxes[secondRandomRes.FinalValue];
 
             Console.WriteLine($"Morty: So, I'll keep box {selectedBox} in the game...");

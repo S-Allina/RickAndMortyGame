@@ -9,6 +9,6 @@ namespace RickAndMortyGame.Core.Interfaces
 {
     public interface IRandomProvider
     {
-        FairRandomResult GenerateFairRandomAsync(int maxValue);
+        FairRandomResult GenerateFairRandom(int maxValue);
     }
 }

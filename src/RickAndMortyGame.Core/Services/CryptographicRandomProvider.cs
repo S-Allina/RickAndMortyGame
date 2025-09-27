@@ -22,7 +22,7 @@ namespace RickAndMortyGame.Core.Services
             _hmacCalculator = new HmacCalculator(); 
         }
 
-        public FairRandomResult GenerateFairRandomAsync(int maxValue)
+        public FairRandomResult GenerateFairRandom(int maxValue)
         {
             var secretKey = _secretKeyGenerator.GenerateKey();
             var computerValue = _randomGenerator.GenerateComputerValue(maxValue);
