@@ -8,63 +8,42 @@ namespace RickAndMortyGame.Core.Services
 {
     public class GameStatistics
     {
-        private int _totalGames;
-        private int _gamesWon;
-        private int _switchGames;
-        private int _switchWins;
-        private int _stayGames;
-        private int _stayWins;
+        public int TotalGames { get; private set; }
+        public int GamesWon { get; private set; }
+        public int SwitchGames { get; private set; }
+        public int SwitchWins { get; private set; }
+        public int StayGames { get; private set; }
+        public int StayWins { get; private set; }
 
-        public int TotalGames
-        {
-            get { return _totalGames; }
-        }
-        public int GamesWon
-        {
-            get { return _gamesWon; }
-        }
-        public int SwitchGames
-        {
-            get { return _switchGames; }
-        }
-        public int SwitchWins
-        {
-            get { return _switchWins; }
-        }
-        public int StayGames
-        {
-            get { return _stayGames; }
-        }
-        public int StayWins
-        {
-            get { return _stayWins; }
-        }
+        public double OverallWinRate => TotalGames > 0 ? (double)GamesWon / TotalGames : 0;
+        public double SwitchWinRate => SwitchGames > 0 ? (double)SwitchWins / SwitchGames : 0;
+        public double StayWinRate => StayGames > 0 ? (double)StayWins / StayGames : 0;
 
         public void RecordGame(bool won, bool switched, int numOfBoxes)
         {
-            _totalGames++;
+            TotalGames++;
 
-            if (won) _gamesWon++;
+            if (won) GamesWon++;
 
             if (switched){
-                _switchGames++;
-                if(won) _switchWins++;
+                SwitchGames++;
+                if(won) SwitchWins++;
             }
             else
             {
-                _stayGames++;
-                if (won) _stayWins++;
+                StayGames++;
+                if (won) StayWins++;
             }
         }
 
-        public double GetExperimentalWinProbabilityWhenSwitch()
+        public string GetExperimentalWinProbabilityWhenSwitch()
         {
-            return _switchGames > 0 ? (double)_switchWins / _switchGames : 0;
+            return SwitchGames > 0 ? (SwitchWins == 0 ? "-" : ((double)SwitchWins / SwitchGames).ToString("F3")) : "0";
         }
 
-        public double GetExperimentalWinProbabilityWhenStay()
+        public string GetExperimentalWinProbabilityWhenStay()
         {
-            return _stayGames > 0 ? (double)_stayWins / _stayGames : 0;
+            return StayGames > 0 ? (StayWins == 0 ? "-" : ((double)StayWins / StayGames).ToString("F3")) : "0";
         }
     }
 }

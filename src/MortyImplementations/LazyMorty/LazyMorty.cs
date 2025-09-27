@@ -1,4 +1,5 @@
 ﻿using RickAndMortyGame.Core.Interfaces;
+using RickAndMortyGame.Core.Models;
 
 namespace LazyMorty
 {
@@ -24,10 +25,8 @@ namespace LazyMorty
             return (double)(numOfBoxes - 1) / numOfBoxes;
         }
 
-        public async Task<int> DecideWhichBoxToSaveAsync(int[] boxes, int portalGunBox, IRandomProvider randomProvider)
+        public int DecideWhichBoxToSave(int[] boxes, int portalGunBox, FairRandomResult secondRoundResult)
         {
-            await Task.Delay(50);
-
             if (boxes.Contains(portalGunBox))
             {
                 return portalGunBox;
@@ -36,9 +35,9 @@ namespace LazyMorty
             return boxes.OrderBy(b => b).First();
         }
 
-        public async Task<int> HidePortalGunAsync(int numberOfBoxes, IRandomProvider randomProvider)
+        public int HidePortalGun(int numberOfBoxes, IRandomProvider randomProvider)
         {
-            var result = await randomProvider.GenerateFairRandomAsync(numberOfBoxes);
+            var result = randomProvider.GenerateFairRandomAsync(numberOfBoxes);
 
             return result.FinalValue;
         }

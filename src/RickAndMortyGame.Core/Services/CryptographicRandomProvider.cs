@@ -22,7 +22,7 @@ namespace RickAndMortyGame.Core.Services
             _hmacCalculator = new HmacCalculator(); 
         }
 
-        public async Task<FairRandomResult> GenerateFairRandomAsync(int maxValue)
+        public FairRandomResult GenerateFairRandomAsync(int maxValue)
         {
             var secretKey = _secretKeyGenerator.GenerateKey();
             var computerValue = _randomGenerator.GenerateComputerValue(maxValue);
@@ -31,9 +31,9 @@ namespace RickAndMortyGame.Core.Services
             Console.WriteLine($"Morty: HAMC={hmac}");
             Console.WriteLine($"Morty: Rick, enter your number [0, {maxValue}) and, uh, don’t say I didn’t play fair, okay?");
 
-            var userValue = await GetUserInputAsync(maxValue);
+            var userValue = GetUserInput(maxValue);
 
-            var finalValue = (computerValue + userValue) % maxValue;
+            var finalValue = (computerValue + userValue) % (maxValue-1);
 
             return new FairRandomResult
             {
@@ -45,7 +45,7 @@ namespace RickAndMortyGame.Core.Services
             };
         }
 
-        private async Task<int> GetUserInputAsync(int maxValue)
+        private int GetUserInput(int maxValue)
         {
             while (true)
             {

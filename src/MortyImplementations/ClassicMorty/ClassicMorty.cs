@@ -1,4 +1,5 @@
 ﻿using RickAndMortyGame.Core.Interfaces;
+using RickAndMortyGame.Core.Models;
 
 namespace ClassicMorty
 {
@@ -24,21 +25,19 @@ namespace ClassicMorty
             return (double)(numOfBoxes - 1) / numOfBoxes;
         }
 
-        public async Task<int> DecideWhichBoxToSaveAsync(int[] boxes, int portalGunBox, IRandomProvider randomProvider)
+        public int DecideWhichBoxToSave(int[] boxes, int portalGunBox, FairRandomResult secondRoundResult)
         {
             if (boxes.Contains(portalGunBox))
             {
                 return portalGunBox;
             }
 
-            var result = await randomProvider.GenerateFairRandomAsync(boxes.Length);
-
-            return boxes[result.FinalValue];
+            return boxes[secondRoundResult.FinalValue];
         }
 
-        public async Task<int> HidePortalGunAsync(int numberOfBoxes, IRandomProvider randomProvider)
+        public int HidePortalGun(int numberOfBoxes, IRandomProvider randomProvider)
         {
-            var result = await randomProvider.GenerateFairRandomAsync(numberOfBoxes);
+            var result = randomProvider.GenerateFairRandomAsync(numberOfBoxes);
 
             return result.FinalValue;
         }

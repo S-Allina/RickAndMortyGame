@@ -21,24 +21,23 @@ namespace RickAndMortyGame.Core.Services
             _gameState = statistics;
         }
 
-        public async Task<GameRoundResult> PlayRoundAsync(int numOfBoxes)
+        public GameRoundResult PlayRound(int numOfBoxes)
         {
             Console.WriteLine($"Oh, Rick, I`m gonna hide your portal gun in one of the {numOfBoxes} boxes, okay?");
 
-            var portalGunRes = await _randomProvider.GenerateFairRandomAsync(numOfBoxes);
+            var portalGunRes = _randomProvider.GenerateFairRandomAsync(numOfBoxes);
             var portalGunBox = portalGunRes.FinalValue;
 
             Console.WriteLine($"Morty: Ok, ok, I hid the gun. What's your guess [0,{numOfBoxes})?");
             
-            var userGuess = await GetUserInputAsync(numOfBoxes);
+            var userGuess =  GetUserInput(numOfBoxes);
             var remainingBoxes = Enumerable.Range(0, numOfBoxes).Where(b => b != userGuess).ToArray();
-            var secondRandomResult = await PerformSecondFairRandomAsync(remainingBoxes, userGuess);
+            var secondRandomResult = PerformSecondFairRandom(remainingBoxes, userGuess);
 
-            var boxToKeep = await _morty.DecideWhichBoxToSaveAsync(remainingBoxes, portalGunBox, _randomProvider);
+            var boxToKeep = _morty.DecideWhichBoxToSave(remainingBoxes, portalGunBox, secondRandomResult);
+            var finalChoice = GetSwitchDecision(userGuess, [ userGuess, boxToKeep ]);
 
-            var finalChoice = await GetSwitchDecisionAsync(userGuess, [ userGuess, boxToKeep ]);
-
-            await RevealFairRandomProofAsync(portalGunRes, secondRandomResult, portalGunBox, numOfBoxes);
+            RevealFairRandomProof(portalGunRes, secondRandomResult, portalGunBox, numOfBoxes);
 
             var won = finalChoice == portalGunBox;
 
@@ -47,15 +46,7 @@ namespace RickAndMortyGame.Core.Services
             return new GameRoundResult { Won = won, PortalGunBox = portalGunBox };
         }
 
-        public async Task<int[]> DeleteBoxesAsync(int userGuess, int portalGunBox, int numOfBoxes)
-        {
-            var boxes = Enumerable.Range(0, numOfBoxes).Where(b=>b!=userGuess).ToArray();
-            var boxesToKeep = await _morty.DecideWhichBoxToSaveAsync(boxes, portalGunBox,_randomProvider);
-        
-            return [userGuess, boxesToKeep];
-        }
-
-        private async Task<int> GetUserInputAsync(int maxValue)
+        private int GetUserInput(int maxValue)
         {
             while (true)
             {
@@ -68,7 +59,7 @@ namespace RickAndMortyGame.Core.Services
             }
         }
 
-        private async Task RevealFairRandomProofAsync(FairRandomResult firstResult, FairRandomResult secondResult, int portalGunBox, int numOfBoxes)
+        private void RevealFairRandomProof(FairRandomResult firstResult, FairRandomResult secondResult, int portalGunBox, int numOfBoxes)
         {
             Console.WriteLine($"Morty: Aww man, my 1st random value is {firstResult.ComputerValue}.");
 
@@ -80,12 +71,12 @@ namespace RickAndMortyGame.Core.Services
 
             Console.WriteLine($"Morty: KEY2={BitConverter.ToString(secondResult.SecretKey).Replace("-", "")}");
 
-            Console.WriteLine($"Morty: Uh, okay, the 2nd fair number is ({secondResult.UserValue} + {secondResult.ComputerValue}) % {numOfBoxes} = {secondResult.FinalValue}.");
+            Console.WriteLine($"Morty: Uh, okay, the 2nd fair number is ({secondResult.UserValue} + {secondResult.ComputerValue}) % {numOfBoxes-1} = {secondResult.FinalValue}.");
 
             Console.WriteLine($"Morty: Your portal gun is in the box {portalGunBox}.");
         }
 
-        private async Task<int> GetSwitchDecisionAsync(int userGuess, int[] boxes)
+        private int GetSwitchDecision(int userGuess, int[] boxes)
         {
             if (boxes.Length <= 1) return userGuess;
 
@@ -112,11 +103,11 @@ namespace RickAndMortyGame.Core.Services
             }
         }
 
-        private async Task<FairRandomResult> PerformSecondFairRandomAsync(int[] availableBoxes, int userGuess)
+        private FairRandomResult PerformSecondFairRandom(int[] availableBoxes, int userGuess)
         {
             Console.WriteLine($"Morty: Let's, uh, generate another value now, I mean, to select a box to keep in the game.");
 
-            var secondRandomRes = await _randomProvider.GenerateFairRandomAsync(availableBoxes.Length);
+            var secondRandomRes = _randomProvider.GenerateFairRandomAsync(availableBoxes.Length);
             var selectedBox = availableBoxes[secondRandomRes.FinalValue];
 
             Console.WriteLine($"Morty: So, I'll keep box {selectedBox} in the game...");

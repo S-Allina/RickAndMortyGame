@@ -10,7 +10,7 @@ namespace RickAndMortyGame.Cli
             {
                 var coordinator = new GameCoordinator();
 
-                coordinator.StartGameAsync(args).Wait();
+                coordinator.StartGame(args);
             }
             catch (Exception ex)
             {

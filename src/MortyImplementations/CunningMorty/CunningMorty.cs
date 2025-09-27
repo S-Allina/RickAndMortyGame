@@ -1,4 +1,5 @@
 ﻿using RickAndMortyGame.Core.Interfaces;
+using RickAndMortyGame.Core.Models;
 
 namespace CunningMorty
 {
@@ -9,7 +10,7 @@ namespace CunningMorty
         const double HONEST_RATE = 0.67;
         const double CHEAT_RATE = 0.33;
 
-        public async Task<int> DecideWhichBoxToSaveAsync(int[] boxes, int portalGunBox, IRandomProvider randomProvider)
+        public int DecideWhichBoxToSave(int[] boxes, int portalGunBox, FairRandomResult secondRoundResult)
         {
             if (ShouldRemovePortalGun(boxes.Length))
             {
@@ -17,9 +18,7 @@ namespace CunningMorty
             }
             else
             {
-                var result = await randomProvider.GenerateFairRandomAsync(boxes.Length);
-
-                return boxes.Contains(portalGunBox) ? portalGunBox : boxes[result.FinalValue];
+                return boxes.Contains(portalGunBox) ? portalGunBox : boxes[secondRoundResult.FinalValue];
             }
         }
 
@@ -44,9 +43,9 @@ namespace CunningMorty
             return honestProbability * HONEST_RATE + cheatProbability * CHEAT_RATE;
         }
 
-        public async Task<int> HidePortalGunAsync(int numberOfBoxes, IRandomProvider randomProvider)
+        public int HidePortalGun(int numberOfBoxes, IRandomProvider randomProvider)
         {
-            var result = await randomProvider.GenerateFairRandomAsync(numberOfBoxes);
+            var result = randomProvider.GenerateFairRandomAsync(numberOfBoxes);
 
             return result.FinalValue;
         }

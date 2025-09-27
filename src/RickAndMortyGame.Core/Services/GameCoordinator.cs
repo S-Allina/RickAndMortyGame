@@ -18,7 +18,7 @@ namespace RickAndMortyGame.Core.Services
             _mortyLoader = new MortyLoader();
         }
 
-        public async Task StartGameAsync(string[] args)
+        public void StartGame(string[] args)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace RickAndMortyGame.Core.Services
                 {
                     render.ShowRoundStart(round, config.NumberOfBoxes);
 
-                    var result = await gameEngine.PlayRoundAsync(config.NumberOfBoxes);
+                    var result = gameEngine.PlayRound(config.NumberOfBoxes);
 
                     render.ShowGameResult(result);
 

@@ -11,12 +11,7 @@ namespace RickAndMortyGame.Core.Services
     {
         public int GenerateComputerValue(int maxValue)
         {
-            using var rng = RandomNumberGenerator.Create();
-            var bytes = new byte[4];
-            rng.GetBytes(bytes);
-            var number = BitConverter.ToInt32(bytes, 0) & int.MaxValue;
-
-            return number % maxValue;
+            return RandomNumberGenerator.GetInt32(0, maxValue);
         }
     }
 }

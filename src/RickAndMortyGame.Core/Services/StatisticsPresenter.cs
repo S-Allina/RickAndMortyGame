@@ -16,7 +16,7 @@ namespace RickAndMortyGame.Core.Services
 
             table.AddRow("Rounds", statistics.SwitchGames, statistics.StayGames);
             table.AddRow("Wins", statistics.SwitchWins, statistics.StayWins);
-            table.AddRow("p (estimate)", statistics.GetExperimentalWinProbabilityWhenSwitch().ToString("F3"), statistics.GetExperimentalWinProbabilityWhenStay().ToString("F3"));
+            table.AddRow("p (estimate)", statistics.GetExperimentalWinProbabilityWhenSwitch(), statistics.GetExperimentalWinProbabilityWhenStay());
             table.AddRow("p (exact)", morty.CalculateWinProbablyWhenSwich(numOfBoxes).ToString("F3"), morty.CalculateWinProbablyWhenStay(numOfBoxes).ToString("F3"));
 
             Console.WriteLine("===STATISTICS===");
